@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spotlight 7 — Module 1c: Hanging out</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    color: #e0e0e0;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: rgba(20, 20, 35, 0.85);
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(255, 107, 53, 0.3), 0 0 80px rgba(0, 200, 255, 0.15);
+    overflow: hidden;
+    border: 1px solid rgba(255, 107, 53, 0.3);
+  }
+  header {
+    background: linear-gradient(135deg, #ff6b35, #ff8c42, #ffb347);
+    color: #fff;
+    padding: 30px 40px;
+    text-align: center;
+    position: relative;
+  }
+  header h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px rgba(255,255,255,0.6);
+  }
+  header p {
+    font-size: 15px;
+    opacity: 0.95;
+    letter-spacing: 0.5px;
+  }
+  .tabs {
+    display: flex;
+    background: rgba(10, 10, 20, 0.7);
+    border-bottom: 2px solid rgba(255, 107, 53, 0.4);
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    flex: 1;
+    min-width: 200px;
+    padding: 18px 20px;
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    color: #888;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: inherit;
+    letter-spacing: 0.5px;
+  }
+  .tab-btn:hover {
+    background: rgba(255, 107, 53, 0.15);
+    color: #ffb347;
+  }
+  .tab-btn.active {
+    color: #fff;
+    background: rgba(255, 107, 53, 0.2);
+    text-shadow: 0 0 10px #ff6b35, 0 0 20px #ff6b35;
+    border-bottom: 3px solid #ff6b35;
+    margin-bottom: -2px;
+  }
+  .tab-content {
+    display: none;
+    padding: 40px;
+    animation: fadeIn 0.4s;
+  }
+  .tab-content.active {
+    display: block;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-img {
+    width: 100%;
+    max-width: 800px;
+    display: block;
+    margin: 0 auto 30px;
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(255, 107, 53, 0.4), 0 0 60px rgba(0, 200, 255, 0.2);
+    border: 2px solid rgba(255, 107, 53, 0.5);
+  }
+  .rule-box {
+    background: rgba(255, 107, 53, 0.08);
+    border-left: 5px solid #ff6b35;
+    padding: 20px 25px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.15);
+  }
+  .rule-box h3 {
+    color: #ffb347;
+    margin-bottom: 12px;
+    font-size: 18px;
+    text-shadow: 0 0 10px rgba(255, 179, 71, 0.5);
+  }
+  .rule-box p, .rule-box li {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #ccc;
+  }
+  .rule-box ul { margin-left: 20px; margin-top: 8px; }
+  .rule-box table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+    font-size: 15px;
+  }
+  .rule-box table td, .rule-box table th {
+    border: 1px solid rgba(255, 107, 53, 0.4);
+    padding: 8px 12px;
+    text-align: left;
+    color: #ddd;
+  }
+  .rule-box table th {
+    background: rgba(255, 107, 53, 0.2);
+    color: #ffb347;
+  }
+  h2.section-title {
+    color: #ffb347;
+    font-size: 22px;
+    margin: 35px 0 18px;
+    padding-bottom: 8px;
+    border-bottom: 2px dashed rgba(255, 107, 53, 0.5);
+    text-shadow: 0 0 10px rgba(255, 179, 71, 0.4);
+  }
+  .exercise {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 12px;
+    padding: 22px 25px;
+    margin-bottom: 22px;
+    border: 1px solid rgba(255, 107, 53, 0.25);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  }
+  .exercise h4 {
+    color: #fff;
+    font-size: 17px;
+    margin-bottom: 14px;
+  }
+  .exercise p, .exercise li {
+    font-size: 15px;
+    line-height: 1.9;
+    color: #ccc;
+  }
+  .exercise ol, .exercise ul {
+    margin-left: 22px;
+    margin-top: 8px;
+  }
+  .exercise input[type="text"] {
+    border: none;
+    border-bottom: 2px solid #ff6b35;
+    background: transparent;
+    font-size: 15px;
+    padding: 4px 8px;
+    width: 140px;
+    font-family: inherit;
+    color: #ffb347;
+    font-weight: 600;
+    outline: none;
+    transition: all 0.3s;
+  }
+  .exercise input[type="text"]:focus {
+    background: rgba(255, 107, 53, 0.15);
+    box-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+    border-radius: 4px;
+  }
+  .word-bank {
+    background: rgba(0, 200, 255, 0.08);
+    border: 1px dashed rgba(0, 200, 255, 0.5);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 12px 0 18px;
+    font-size: 14px;
+    color: #9be7ff;
+    line-height: 1.8;
+  }
+  .word-bank strong { color: #00c8ff; }
+  .check-btn {
+    background: linear-gradient(135deg, #ff6b35, #ff8c42);
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 16px;
+    font-family: inherit;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    box-shadow: 0 0 15px rgba(255, 107, 53, 0.6), 0 0 30px rgba(255, 107, 53, 0.3);
+    text-transform: uppercase;
+  }
+  .check-btn:hover {
+    box-shadow: 0 0 25px rgba(255, 107, 53, 0.9), 0 0 50px rgba(255, 107, 53, 0.5);
+    transform: translateY(-2px);
+  }
+  .check-btn:active {
+    transform: translateY(0);
+  }
+  .result {
+    margin-top: 14px;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    display: none;
+  }
+  .result.show { display: block; }
+  .correct {
+    color: #00ff9d;
+    background: rgba(0, 255, 157, 0.1);
+    border-left: 4px solid #00ff9d;
+    text-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+  }
+  .incorrect {
+    color: #ff4d6d;
+    background: rgba(255, 77, 109, 0.1);
+    border-left: 4px solid #ff4d6d;
+    text-shadow: 0 0 10px rgba(255, 77, 109, 0.5);
+  }
+  .match-game {
+    display: flex;
+    gap: 40px;
+    justify-content: space-between;
+    position: relative;
+    margin-top: 15px;
+  }
+  .match-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .match-item {
+    padding: 12px 16px;
+    background: rgba(255, 107, 53, 0.12);
+    border: 2px solid rgba(255, 107, 53, 0.5);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #ddd;
+    transition: all 0.25s;
+    user-select: none;
+  }
+  .match-item:hover {
+    background: rgba(255, 107, 53, 0.25);
+    box-shadow: 0 0 15px rgba(255, 107, 53, 0.5);
+  }
+  .match-item.selected {
+    background: rgba(0, 200, 255, 0.25);
+    border-color: #00c8ff;
+    box-shadow: 0 0 20px rgba(0, 200, 255, 0.7);
+    color: #fff;
+  }
+  .match-item.matched {
+    background: rgba(0, 255, 157, 0.15);
+    border-color: #00ff9d;
+    color: #00ff9d;
+    cursor: default;
+    pointer-events: none;
+    box-shadow: 0 0 15px rgba(0, 255, 157, 0.4);
+  }
+  .match-item.matched.wrong {
+    background: rgba(255, 77, 109, 0.15);
+    border-color: #ff4d6d;
+    color: #ff4d6d;
+    box-shadow: 0 0 15px rgba(255, 77, 109, 0.4);
+  }
+  .match-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .match-svg line { stroke-linecap: round; }
+  .sort-source {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 16px;
+    background: rgba(255, 107, 53, 0.08);
+    border: 2px dashed rgba(255, 107, 53, 0.5);
+    border-radius: 12px;
+    margin-bottom: 22px;
+    min-height: 70px;
+  }
+  .sort-chip {
+    padding: 10px 16px;
+    background: linear-gradient(135deg, #ff6b35, #ff8c42);
+    color: #fff;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: grab;
+    user-select: none;
+    transition: all 0.2s;
+    box-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+    touch-action: none;
+  }
+  .sort-chip:hover {
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.9);
+    transform: translateY(-2px);
+  }
+  .sort-chip.dragging {
+    opacity: 0.4;
+    cursor: grabbing;
+  }
+  .sort-chip.placed {
+    cursor: pointer;
+    background: linear-gradient(135deg, #00c8ff, #00ff9d);
+    box-shadow: 0 0 10px rgba(0, 200, 255, 0.6);
+  }
+  .sort-zones {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .sort-zone {
+    background: rgba(0, 200, 255, 0.06);
+    border: 2px solid rgba(0, 200, 255, 0.4);
+    border-radius: 12px;
+    padding: 14px;
+    min-height: 160px;
+    transition: all 0.25s;
+  }
+  .sort-zone.dragover {
+    background: rgba(0, 200, 255, 0.2);
+    border-color: #00c8ff;
+    box-shadow: 0 0 20px rgba(0, 200, 255, 0.6);
+  }
+  .sort-zone h5 {
+    color: #00c8ff;
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(0, 200, 255, 0.5);
+  }
+  .sort-zone .zone-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-height: 40px;
+  }
+  @media (max-width: 700px) {
+    .sort-zones { grid-template-columns: 1fr; }
+  }
+  footer {
+    background: rgba(10, 10, 20, 0.9);
+    color: #666;
+    text-align: center;
+    padding: 20px;
+    font-size: 13px;
+    border-top: 1px solid rgba(255, 107, 53, 0.2);
+  }
+  @media (max-width: 600px) {
+    .tab-content { padding: 20px; }
+    header h1 { font-size: 22px; }
+    .match-game { flex-direction: column; gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>🎒 Hanging out</h1>
+    <p>Spotlight 7 — Module 1c | Free time activities • Prepositions • Recycling</p>
+  </header>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="openTab(event, 'tab1')">🕐 Free time activities</button>
+    <button class="tab-btn" onclick="openTab(event, 'tab2')">📍 Prepositions</button>
+    <button class="tab-btn" onclick="openTab(event, 'tab3')">🔄 Recycling</button>
+  </div>
+
+  <!-- ================= TAB 1: FREE TIME ACTIVITIES ================= -->
+  <div id="tab1" class="tab-content active">
+
+    <img src="free-time-activities.jpg" alt="Free time activities" class="hero-img">
+
+    <div class="rule-box">
+      <h3>📘 How to talk about free time activities</h3>
+      <p>We use <strong>Present Simple</strong> for habits and routines:</p>
+      <ul>
+        <li><em>I <strong>read</strong> a book on a rainy day.</em></li>
+        <li><em>We <strong>go</strong> surfing on a hot day.</em></li>
+      </ul>
+      <p style="margin-top:12px;"><strong>⚠️ Note:</strong> after <em>go</em> + <em>-ing</em> (go surfing), after <em>play</em> + sport (play volleyball), after <em>do</em> + housework (do the gardening).</p>
+    </div>
+
+    <h2 class="section-title">✏️ Exercise 1. Sort the activities</h2>
+    <div class="exercise">
+      <p>Drag each activity into the group where YOU usually do it. There is no single correct answer — it's your choice!</p>
+
+      <div class="sort-source" id="sortSource1">
+        <div class="sort-chip" draggable="true">read a book</div>
+        <div class="sort-chip" draggable="true">go sunbathing</div>
+        <div class="sort-chip" draggable="true">hang out at the shopping centre</div>
+        <div class="sort-chip" draggable="true">chat with friends</div>
+        <div class="sort-chip" draggable="true">go surfing</div>
+        <div class="sort-chip" draggable="true">do the gardening</div>
+        <div class="sort-chip" draggable="true">surf the Net</div>
+        <div class="sort-chip" draggable="true">play beach volleyball</div>
+        <div class="sort-chip" draggable="true">have lunch outdoors</div>
+        <div class="sort-chip" draggable="true">play computer games</div>
+        <div class="sort-chip" draggable="true">go shopping</div>
+      </div>
+
+      <div class="sort-zones">
+        <div class="sort-zone" data-zone="rainy">
+          <h5>🌧️ on a rainy day</h5>
+          <div class="zone-items"></div>
+        </div>
+        <div class="sort-zone" data-zone="hot">
+          <h5>☀️ on a hot day</h5>
+          <div class="zone-items"></div>
+        </div>
+        <div class="sort-zone" data-zone="warm">
+          <h5>🌤️ on a warm day</h5>
+          <div class="zone-items"></div>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-title">✏️ Exercise 2. Match the phrase with its translation</h2>
+    <div class="exercise">
+      <p>Click a phrase on the left, then click its translation on the right.</p>
+      <div class="match-game" id="matchGame1">
+        <svg class="match-svg" id="svg1"></svg>
+        <div class="match-col" id="colLeft1">
+          <div class="match-item" data-id="1" data-side="left">hang out at the shopping centre</div>
+          <div class="match-item" data-id="2" data-side="left">do the gardening</div>
+          <div class="match-item" data-id="3" data-side="left">have lunch outdoors</div>
+          <div class="match-item" data-id="4" data-side="left">read a book</div>
+          <div class="match-item" data-id="5" data-side="left">go sunbathing</div>
+          <div class="match-item" data-id="6" data-side="left">surf the Net</div>
+          <div class="match-item" data-id="7" data-side="left">play beach volleyball</div>
+          <div class="match-item" data-id="8" data-side="left">rent a DVD</div>
+        </div>
+        <div class="match-col" id="colRight1">
+          <div class="match-item" data-id="5" data-side="right">загорать</div>
+          <div class="match-item" data-id="8" data-side="right">взять напрокат DVD</div>
+          <div class="match-item" data-id="1" data-side="right">гулять по торговому центру</div>
+          <div class="match-item" data-id="6" data-side="right">сидеть в интернете</div>
+          <div class="match-item" data-id="3" data-side="right">обедать на улице</div>
+          <div class="match-item" data-id="7" data-side="right">играть в пляжный волейбол</div>
+          <div class="match-item" data-id="2" data-side="right">заниматься садоводством</div>
+          <div class="match-item" data-id="4" data-side="right">читать книгу</div>
+        </div>
+      </div>
+      <button class="check-btn" onclick="checkMatch1()">Check</button>
+      <div class="result" id="result2"></div>
+    </div>
+
+    <h2 class="section-title">✏️ Exercise 3. What do you do on these days?</h2>
+    <div class="exercise">
+      <p>Write one activity for each type of day:</p>
+      <ol>
+        <li>on a rainy day: <input type="text" id="r1" style="width:300px;"></li>
+        <li>on a hot day: <input type="text" id="r2" style="width:300px;"></li>
+        <li>on a warm day: <input type="text" id="r3" style="width:300px;"></li>
+      </ol>
+      <button class="check-btn" onclick="checkPogoda()">Check</button>
+      <div class="result" id="result3"></div>
+    </div>
+
+    <h2 class="section-title">✏️ Exercise 4. Fill in the missing word</h2>
+    <div class="exercise">
+      <div class="word-bank"><strong>Word bank:</strong> outdoors • gardening • surfing • chat • Net • volleyball • shopping</div>
+      <ol>
+        <li>On a rainy day I read a book and <input type="text" id="w1"> with my friends.</li>
+        <li>My sister likes to surf the <input type="text" id="w2"> in the evening.</li>
+        <li>We have lunch <input type="text" id="w3"> when the weather is warm.</li>
+        <li>My grandad does the <input type="text" id="w4"> in the garden.</li>
+        <li>On a hot day we go <input type="text" id="w5"> at the beach.</li>
+        <li>Let's play beach <input type="text" id="w6"> on Saturday!</li>
+        <li>We can hang out at the <input type="text" id="w7"> centre.</li>
+      </ol>
+      <button class="check-btn" onclick="checkWords()">Check</button>
+      <div class="result" id="result4"></div>
+    </div>
+
+    <h2 class="section-title">✏️ Exercise 5. Choose the correct option</h2>
+    <div class="exercise">
+      <ol>
+        <li>On a rainy day I like to <input type="text" id="c1"> (read a book / go sunbathing).</li>
+        <li>On a hot day we <input type="text" id="c2"> (do the gardening / go surfing).</li>
+        <li>On a warm day they <input type="text" id="c3"> (have lunch outdoors / rent a DVD).</li>
+        <li>When it's cold, I <input type="text" id="c4"> (surf the Net / go beach volleyball).</li>
+        <li>My mum <input type="text" id="c5"> (does the gardening / plays beach volleyball) in spring.</li>
+      </ol>
+      <button class="check-btn" onclick="checkChoice()">Check</button>
+      <div class="result" id="result5"></div>
+    </div>
+
+  </div>
+
+  <!-- ================= TAB 2: PREPOSITIONS ================= -->
+  <div id="tab2" class="tab-content">
+
+    <img src="prepositions.jpg" alt="Prepositions" class="hero-img">
+
+    <div class="rule-box">
+      <h3>📘 Prepositions with activities and places</h3>
+      <table>
+        <tr><th>Formula</th><th>Example</th></tr>
+        <tr><td>go <strong>on</strong> a ride</td><td>We went <strong>on</strong> a ride at the park.</td></tr>
+        <tr><td>a film <strong>at</strong> the cinema</td><td>Let's watch a film <strong>at</strong> the IMAX theatre.</td></tr>
+        <tr><td>a visit <strong>to</strong> a place</td><td>We went on a visit <strong>to</strong> the museum.</td></tr>
+        <tr><td>be crazy <strong>about</strong> sth</td><td>I'm crazy <strong>about</strong> skateboarding.</td></tr>
+        <tr><td>shop <strong>for</strong> sth</td><td>This is the best place to shop <strong>for</strong> gifts.</td></tr>
+        <tr><td>choose <strong>from</strong> sth</td><td>There are plenty of activities to choose <strong>from</strong>.</td></tr>
+      </table>
+    </div>
+
+    <h2 class="section-title">✏️ Exercise 6. Fill in the preposition</h2>
+    <div class="exercise">
+      <div class="word-bank"><strong>Word bank:</strong> on • for • from • at • about • to</div>
+      <ol>
+        <li>We went <input type="text" id="p1"> a ride at the theme park.</li>
+        <li>I'm crazy <input type="text" id="p2"> football!</li>
+        <li>Let's watch a film <input type="text" id="p3"> the cinema.</li>
+        <li>This shop is the best place to shop <input type="text" id="p4"> gifts.</li>
+        <li>We went on a visit <input type="text" id="p5"> the museum yesterday.</li>
+        <li>There are plenty of activities to choose <input type="text" id="p6">.</li>
+        <li>She is crazy <input type="text" id="p7"> skateboarding.</li>
+        <li>I bought a ticket <input type="text" id="p8"> the carousel.</li>
+        <li>We go <input type="text" id="p9"> a ride at the park every weekend.</li>
+        <li>Let's go <input type="text" id="p10"> the cinema tonight.</li>
+        <li>You can choose <input type="text" id="p11"> three different activities.</li>
+        <li>I need to shop <input type="text" id="p12"> a present for my mum.</li>
+      </ol>
+      <button class="check-btn" onclick="checkPrep()">Check</button>
+      <div class="result" id="result6"></div>
+    </div>
+
+  </div>
+
+  <!-- ================= TAB 3: RECYCLING ================= -->
+  <div id="tab3" class="tab-content">
+
+    <img src="recycling-city-country.jpg" alt="City vs Country" class="hero-img">
+
+    <div class="rule-box">
+      <h3>📘 Remember from lesson 1a (City mouse or country mouse?)</h3>
+      <table>
+        <tr><th>🏙️ City</th><th>🌳 Country</th></tr>
+        <tr><td>heavy traffic</td><td>peace and quiet</td></tr>
+        <tr><td>crowded streets</td><td>fresh air</td></tr>
+        <tr><td>hustle and bustle</td><td>beautiful landscapes</td></tr>
+        <tr><td>high cost of living</td><td>friendly people</td></tr>
+        <tr><td>convenient public transport</td><td>low rate of unemployment</td></tr>
+      </table>
+    </div>
+
+    <div class="rule-box">
+      <h3>📘 Remember from lesson 1b (Better safe than sorry)</h3>
+      <p><strong>Should / Shouldn't</strong> = advice:</p>
+      <ul>
+        <li><em>You <strong>should</strong> install an alarm system.</em></li>
+        <li><em>You <strong>shouldn't</strong> open the door to strangers.</em></li>
+      </ul>
+      <p style="margin-top:10px;"><strong>Phrasal verbs with run:</strong></p>
+      <ul>
+        <li><strong>run after</strong> — бежать за, преследовать: <em>Don't run after the burglar!</em></li>
+        <li><strong>run into</strong> — случайно встретить: <em>I ran into my friend at the shopping centre.</em></li>
+        <li><strong>run out of</strong> — закончиться: <em>We ran out of milk, so we went shopping.</em></li>
+      </ul>
+    </div>
+
+    <h2 class="section-title">✏️ Exercise 7. Match the beginning and the end</h2>
+    <div class="exercise">
+      <p>Click a phrase on the left, then click its ending on the right. Use the new vocabulary from this lesson.</p>
+      <div class="match-game" id="matchGame2">
+        <svg class="match-svg" id="svg2"></svg>
+        <div class="match-col" id="colLeft2">
+          <div class="match-item" data-id="1" data-side="left">In the city there is heavy traffic...</div>
+          <div class="match-item" data-id="2" data-side="left">In the country there is peace and quiet...</div>
+          <div class="match-item" data-id="3" data-side="left">On a rainy day I stay at home...</div>
+          <div class="match-item" data-id="4" data-side="left">On a hot day we go to the beach...</div>
+          <div class="match-item" data-id="5" data-side="left">On a warm day my family...</div>
+        </div>
+        <div class="match-col" id="colRight2">
+          <div class="match-item" data-id="4" data-side="right">...and go surfing and sunbathing.</div>
+          <div class="match-item" data-id="1" data-side="right">...but I love the hustle and bustle of big cities.</div>
+          <div class="match-item" data-id="5" data-side="right">...has lunch outdoors in the park.</div>
+          <div class="match-item" data-id="2" data-side="right">...and I can relax in the fresh air.</div>
+          <div class="match-item" data-id="3" data-side="right">...and read a book or surf the Net.</div>
+        </div>
+      </div>
+      <button class="check-btn" onclick="checkMatch2()">Check</button>
+      <div class="result" id="result7"></div>
+    </div>
+
+    <h2 class="section-title">✏️ Exercise 8. Give advice with should / shouldn't</h2>
+    <div class="exercise">
+      <p>Read the situation and write the advice. Use the words in brackets.</p>
+      <ol>
+        <li>Your friend is crazy about skateboarding but doesn't wear a helmet. <br>
+          → You <input type="text" id="sh1" style="width:260px;"> (wear a helmet).</li>
+        <li>Your sister wants to go surfing on a cold day. <br>
+          → You <input type="text" id="sh2" style="width:260px;"> (not go surfing / cold day).</li>
+        <li>Your brother has plenty of free time but stays at home all day. <br>
+          → He <input type="text" id="sh3" style="width:260px;"> (hang out with friends).</li>
+        <li>Your friend is going to a theme park and wants to go on a ride without a ticket. <br>
+          → You <input type="text" id="sh4" style="width:260px;"> (not go on a ride without a ticket).</li>
+        <li>Your mum is tired after work. <br>
+          → She <input type="text" id="sh5" style="width:260px;"> (have lunch outdoors / relax).</li>
+      </ol>
+      <button class="check-btn" onclick="checkShould()">Check</button>
+      <div class="result" id="result8"></div>
+    </div>
+
+    <h2 class="section-title">✏️ Exercise 9. Complete the sentences</h2>
+    <div class="exercise">
+      <div class="word-bank">
+        <strong>Word bank:</strong> hang out • go surfing • peace and quiet • read a book • have lunch outdoors • surf the Net • go sunbathing • do the gardening • heavy traffic • run into • run out of • run after
+      </div>
+      <ol>
+        <li>In the city there is <input type="text" id="rc1" style="width:200px;">, but in the country there is <input type="text" id="rc1b" style="width:200px;">.</li>
+        <li>In the city there are many shopping centres where you can <input type="text" id="rc2" style="width:200px;"> with your friends.</li>
+        <li>On a rainy day I <input type="text" id="rc3" style="width:200px;"> and <input type="text" id="rc3b" style="width:200px;"> at home.</li>
+        <li>On a hot day we <input type="text" id="rc4" style="width:200px;"> and <input type="text" id="rc4b" style="width:200px;"> at the beach.</li>
+        <li>On a warm day my family <input type="text" id="rc5" style="width:200px;"> and <input type="text" id="rc5b" style="width:200px;">.</li>
+        <li>Yesterday I <input type="text" id="rc6" style="width:200px;"> my friend at the shopping centre.</li>
+        <li>We <input type="text" id="rc7" style="width:200px;"> milk, so we went shopping.</li>
+        <li>Don't <input type="text" id="rc8" style="width:200px;"> the burglar — call the police!</li>
+      </ol>
+      <button class="check-btn" onclick="checkRecycle()">Check</button>
+      <div class="result" id="result9"></div>
+    </div>
+
+  </div>
+
+  <footer>
+    © Spotlight 7 — Module 1c "Hanging out" | Interactive exercises
+  </footer>
+</div>
+
+<script>
+const AudioCtx = window.AudioContext || window.webkitAudioContext;
+let audioCtx = null;
+
+function playSound(type) {
+  try {
+    if (!audioCtx) audioCtx = new AudioCtx();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    const now = audioCtx.currentTime;
+    if (type === 'click') {
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(880, now);
+      osc.frequency.exponentialRampToValueAtTime(1200, now + 0.08);
+      gain.gain.setValueAtTime(0.08, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+      osc.start(now); osc.stop(now + 0.12);
+    } else if (type === 'correct') {
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(660, now);
+      osc.frequency.setValueAtTime(880, now + 0.08);
+      osc.frequency.setValueAtTime(1320, now + 0.16);
+      gain.gain.setValueAtTime(0.1, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+      osc.start(now); osc.stop(now + 0.3);
+    } else if (type === 'wrong') {
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(220, now);
+      osc.frequency.exponentialRampToValueAtTime(110, now + 0.25);
+      gain.gain.setValueAtTime(0.1, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+      osc.start(now); osc.stop(now + 0.3);
+    }
+  } catch (e) {}
+}
+
+function openTab(evt, tabName) {
+  playSound('click');
+  const contents = document.querySelectorAll('.tab-content');
+  const btns = document.querySelectorAll('.tab-btn');
+  contents.forEach(c => c.classList.remove('active'));
+  btns.forEach(b => b.classList.remove('active'));
+  document.getElementById(tabName).classList.add('active');
+  evt.currentTarget.classList.add('active');
+}
+
+function normalize(s) { return s.trim().toLowerCase().replace(/[.,!?]/g, ''); }
+
+function showResult(id, correct, total) {
+  const el = document.getElementById(id);
+  el.classList.add('show');
+  if (correct === total) {
+    el.className = 'result show correct';
+    el.innerHTML = `✅ All correct! ${correct}/${total}`;
+    playSound('correct');
+  } else {
+    el.className = 'result show incorrect';
+    el.innerHTML = `❌ Correct: ${correct}/${total}. Try again!`;
+    playSound('wrong');
+  }
+}
+
+let selectedChip = null;
+
+function initSorting() {
+  const source = document.getElementById('sortSource1');
+  const zones = document.querySelectorAll('.sort-zone');
+  document.querySelectorAll('.sort-chip').forEach(chip => {
+    chip.addEventListener('dragstart', e => {
+      chip.classList.add('dragging');
+      e.dataTransfer.setData('text/plain', chip.textContent);
+      e.dataTransfer.effectAllowed = 'move';
+    });
+    chip.addEventListener('dragend', () => chip.classList.remove('dragging'));
+    chip.addEventListener('click', () => {
+      playSound('click');
+      if (chip.classList.contains('placed')) {
+        source.appendChild(chip);
+        chip.classList.remove('placed');
+        return;
+      }
+      if (selectedChip === chip) {
+        chip.style.outline = 'none';
+        selectedChip = null;
+      } else {
+        if (selectedChip) selectedChip.style.outline = 'none';
+        selectedChip = chip;
+        chip.style.outline = '3px solid #00c8ff';
+      }
+    });
+  });
+  zones.forEach(zone => {
+    zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+    zone.addEventListener('drop', e => {
+      e.preventDefault();
+      zone.classList.remove('dragover');
+      const text = e.dataTransfer.getData('text/plain');
+      const chip = [...document.querySelectorAll('.sort-chip')].find(c => c.textContent === text && !c.classList.contains('placed'));
+      if (chip) {
+        zone.querySelector('.zone-items').appendChild(chip);
+        chip.classList.add('placed');
+        playSound('click');
+      }
+    });
+    zone.addEventListener('click', () => {
+      if (selectedChip) {
+        zone.querySelector('.zone-items').appendChild(selectedChip);
+        selectedChip.classList.add('placed');
+        selectedChip.style.outline = 'none';
+        selectedChip = null;
+        playSound('click');
+      }
+    });
+  });
+}
+
+function initMatchGame(gameId, svgId, leftColId, rightColId, resultId) {
+  const game = document.getElementById(gameId);
+  const svg = document.getElementById(svgId);
+  const leftCol = document.getElementById(leftColId);
+  const rightCol = document.getElementById(rightColId);
+  let selectedLeft = null;
+  let connections = [];
+  function drawLine(leftEl, rightEl, color, wrong) {
+    const c = game.getBoundingClientRect();
+    const l = leftEl.getBoundingClientRect();
+    const r = rightEl.getBoundingClientRect();
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', l.right - c.left);
+    line.setAttribute('y1', l.top + l.height/2 - c.top);
+    line.setAttribute('x2', r.left - c.left);
+    line.setAttribute('y2', r.top + r.height/2 - c.top);
+    line.setAttribute('stroke', wrong ? '#ff4d6d' : color);
+    line.setAttribute('stroke-width', '3');
+    line.setAttribute('opacity', '0.8');
+    svg.appendChild(line);
+  }
+  leftCol.querySelectorAll('.match-item').forEach(item => {
+    item.addEventListener('click', () => {
+      if (item.classList.contains('matched')) return;
+      playSound('click');
+      leftCol.querySelectorAll('.match-item').forEach(i => i.classList.remove('selected'));
+      item.classList.add('selected');
+      selectedLeft = item;
+    });
+  });
+  rightCol.querySelectorAll('.match-item').forEach(item => {
+    item.addEventListener('click', () => {
+      if (!selectedLeft || item.classList.contains('matched')) return;
+      const isCorrect = selectedLeft.dataset.id === item.dataset.id;
+      playSound(isCorrect ? 'correct' : 'wrong');
+      drawLine(selectedLeft, item, isCorrect ? '#00ff9d' : '#ff4d6d', !isCorrect);
+      selectedLeft.classList.remove('selected');
+      selectedLeft.classList.add('matched');
+      item.classList.add('matched');
+      if (!isCorrect) {
+        selectedLeft.classList.add('wrong');
+        item.classList.add('wrong');
+      }
+      connections.push({ left: selectedLeft, right: item, correct: isCorrect });
+      selectedLeft = null;
+    });
+  });
+  return function check() {
+    const total = leftCol.querySelectorAll('.match-item').length;
+    const correct = connections.filter(c => c.correct).length;
+    showResult(resultId, correct, total);
+  };
+}
+
+initSorting();
+const checkMatch1Fn = initMatchGame('matchGame1', 'svg1', 'colLeft1', 'colRight1', 'result2');
+const checkMatch2Fn = initMatchGame('matchGame2', 'svg2', 'colLeft2', 'colRight2', 'result7');
+function checkMatch1() { checkMatch1Fn(); }
+function checkMatch2() { checkMatch2Fn(); }
+
+function checkPogoda() {
+  const groups = {
+    r1: ['read','chat','computer','net','book','dvd','games'],
+    r2: ['sunbathing','surfing','volleyball','beach','surf'],
+    r3: ['hang','gardening','lunch','outdoors','shopping']
+  };
+  let correct = 0;
+  for (const id in groups) {
+    const v = normalize(document.getElementById(id).value);
+    if (groups[id].some(word => v.includes(word))) correct++;
+  }
+  showResult('result3', correct, 3);
+}
+
+function checkWords() {
+  const answers = {w1:'chat', w2:'net', w3:'outdoors', w4:'gardening', w5:'surfing', w6:'volleyball', w7:'shopping'};
+  let correct = 0;
+  for (const id in answers) if (normalize(document.getElementById(id).value) === answers[id]) correct++;
+  showResult('result4', correct, 7);
+}
+
+function checkChoice() {
+  const answers = {c1:'read a book', c2:'go surfing', c3:'have lunch outdoors', c4:'surf the net', c5:'does the gardening'};
+  let correct = 0;
+  for (const id in answers) if (normalize(document.getElementById(id).value) === answers[id]) correct++;
+  showResult('result5', correct, 5);
+}
+
+function checkPrep() {
+  const answers = {
+    p1: 'on', p2: 'about', p3: 'at', p4: 'for', p5: 'to', p6: 'from',
+    p7: 'about', p8: 'for', p9: 'on', p10: 'to', p11: 'from', p12: 'for'
+  };
+  let correct = 0;
+  for (const id in answers) if (normalize(document.getElementById(id).value) === answers[id]) correct++;
+  showResult('result6', correct, 12);
+}
+
+function checkShould() {
+  let correct = 0;
+  for (let i = 1; i <= 5; i++) {
+    const v = normalize(document.getElementById('sh' + i).value);
+    if (v.includes('should') && v.length > 8) correct++;
+  }
+  showResult('result8', correct, 5);
+}
+
+function checkRecycle() {
+  const checks = [
+    ['rc1', ['heavy traffic','traffic']],
+    ['rc1b', ['peace and quiet','peace','quiet']],
+    ['rc2', ['hang out','hang']],
+    ['rc3', ['read a book','read']],
+    ['rc3b', ['surf the net','surf']],
+    ['rc4', ['go surfing','surf']],
+    ['rc4b', ['go sunbathing','sunbath']],
+    ['rc5', ['have lunch outdoors','have lunch','lunch']],
+    ['rc5b', ['do the gardening','gardening']],
+    ['rc6', ['ran into','run into','into']],
+    ['rc7', ['ran out of','run out of','out of']],
+    ['rc8', ['run after','after']]
+  ];
+  let correct = 0;
+  checks.forEach(([id, keywords]) => {
+    const v = normalize(document.getElementById(id).value);
+    if (keywords.some(k => v.includes(k))) correct++;
+  });
+  showResult('result9', correct, checks.length);
+}
+</script>
+
+</body>
+</html>
